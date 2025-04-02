@@ -164,6 +164,19 @@ std::shared_ptr<Value> operator/(std::shared_ptr<Value> lhs, std::shared_ptr<Val
     return lhs * pow(rhs, std::make_shared<Value>(-1.0));
 }
 
+std::shared_ptr<Value> relu(std::shared_ptr<Value> base)
+{
+    std::shared_ptr<Value> out = std::make_shared<Value>(std::max(base->GetData(), 0.0),
+                                                         std::unordered_set<std::shared_ptr<Value>>{base},
+                                                         "ReLU");
+    auto backward_func = [base, out]()
+    {
+        base->SetGrad(base->GetGrad() + (base->GetData() > 0 ? 1 : 0) * out->GetGrad());
+    };
+    out->SetBackwardFunc(backward_func);
+    return out;
+}
+
 std::string Value::DebugMessage() const
 {
     std::string message = "Value(" + std::to_string(data_) + ", " + std::to_string(grad_) + ", " + op_ + ")";

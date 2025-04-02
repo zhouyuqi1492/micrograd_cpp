@@ -35,6 +35,7 @@ public:
   friend std::shared_ptr<Value> operator-(std::shared_ptr<Value> lhs, std::shared_ptr<Value> rhs);
   friend std::shared_ptr<Value> operator/(std::shared_ptr<Value> lhs, std::shared_ptr<Value> rhs);
   friend std::shared_ptr<Value> pow(std::shared_ptr<Value> base, std::shared_ptr<Value> exp);
+  friend std::shared_ptr<Value> relu(std::shared_ptr<Value> base);
 
   std::string DebugMessage() const;
 
@@ -52,3 +53,4 @@ std::shared_ptr<Value> operator-(std::shared_ptr<Value> base);
 std::shared_ptr<Value> operator-(std::shared_ptr<Value> lhs, std::shared_ptr<Value> rhs);
 std::shared_ptr<Value> operator/(std::shared_ptr<Value> lhs, std::shared_ptr<Value> rhs);
 std::shared_ptr<Value> pow(std::shared_ptr<Value> base, std::shared_ptr<Value> exp);
+std::shared_ptr<Value> relu(std::shared_ptr<Value> base);
